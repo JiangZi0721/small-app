@@ -1,0 +1,6 @@
+interface:
+  display_name: "视觉识别"
+  short_description: "识图、OCR、目标检测与视频抽帧的视觉识别能力"
+  default_prompt: "使用 $vision 分析这张图片"
+policy:
+  allow_implicit_invocation: true

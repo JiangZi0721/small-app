@@ -1,0 +1,4 @@
+rapidocr-onnxruntime>=1.3.0
+opencv-python-headless>=4.8.0
+# 可选：本地目标检测（会拉取 torch，体积较大）
+# ultralytics>=8.0

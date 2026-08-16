@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+assets/frames/
+assets/test_images/
+*.onnx
+*.pt
