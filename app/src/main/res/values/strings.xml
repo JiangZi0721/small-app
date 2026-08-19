@@ -1,0 +1,9 @@
+<resources>
+    <string name="notification_channel_protection_feedback">Protection feedback</string>
+    <string name="notification_title_protection_blocked">ShakeGuard blocked a jump</string>
+    <string name="notification_content_protection_blocked">%1$s to %2$s</string>
+    <string name="notification_action_allow_once">Allow once</string>
+    <string name="notification_action_allow_pair">Always allow this jump</string>
+    <string name="notification_action_confirm_ad">This is an ad</string>
+    <string name="notification_action_stop_protecting_source">Stop protecting this app</string>
+</resources>
