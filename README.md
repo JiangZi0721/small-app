@@ -1,4 +1,48 @@
 # ShakeGuard
+## 备份说明
+
+本目录是 `ShakeGuard` 最新完整实现的可发布前备份副本，备份目标为 `JiangZi0721/small-app`。截至 2026-08-30，备份基线对应本地分支 `feature/feedback-notifications` 的提交 `10bbe9205c0d8420debfebc38c1bc1e99d3a7577`（`docs: record recovery validation command`）。
+
+选择这个基线而不是根目录 `main` 的原因是：根目录 `main` 仍停留在只有核心保护逻辑的早期版本，而该基线已经包含通知反馈、来源选择、规则管理、活动记录和可操作 Compose UI。项目文件共 93 个，构建缓存、IDE 文件、`local.properties`、设备密钥和 APK 均未纳入版本控制。
+
+如果以后从 GitHub 恢复开发，优先以该备份的 `main` 为起点，再建立新的功能分支；不要把 `app/build/`、`.gradle/` 或本机 `local.properties` 提交回仓库。
+
+## 项目结构
+
+```text
+ShakeGuard/
+├─ app/
+│  ├─ src/main/java/com/shakeguard/
+│  │  ├─ accessibility/   # 无障碍服务、窗口事件适配、回退执行
+│  │  ├─ data/            # Room、DataStore、Repository、事务
+│  │  ├─ feedback/        # 一次性允许和用户反馈用例
+│  │  ├─ notifications/   # 拦截通知和反馈广播接收器
+│  │  ├─ protection/      # 领域模型、会话、规则、协调器
+│  │  └─ ui/              # Compose 页面、导航、ViewModel
+│  ├─ src/test/           # 纯 Kotlin/JVM 单元测试
+│  ├─ src/androidTest/    # Room、Manifest、Compose 和设备测试
+│  └─ schemas/            # Room v1/v2 schema 与迁移基线
+├─ docs/superpowers/
+│  ├─ specs/              # 需求、边界和交互设计
+│  └─ plans/              # 分阶段实现计划
+├─ gradle/
+│  ├─ libs.versions.toml  # Gradle Version Catalog
+│  └─ wrapper/             # Gradle Wrapper 8.10.2
+├─ build.gradle.kts       # 插件声明
+├─ settings.gradle.kts    # 仓库、模块和项目名
+└─ README.md              # 技术说明、验证记录和恢复指南
+```
+
+### 模块职责
+
+| 模块 | 核心职责 | 关键学习点 |
+| --- | --- | --- |
+| `accessibility` | 监听前台窗口并在命中保护规则后执行返回 | Android 系统边界、服务生命周期、事件去重 |
+| `protection` | 管理保护会话并按优先级产生 `ALLOW`、`OBSERVE`、`BLOCK` | 纯 Kotlin 领域建模、状态机、可测试时钟 |
+| `data` | 持久化来源、规则、事件和设置 | Room 映射、迁移、事务、Repository 分层 |
+| `feedback` | 将通知操作转换为可回滚的业务命令 | Mutex、幂等写入、取消传播 |
+| `notifications` | 发布首次阻断通知并接收四种反馈操作 | Android 13 权限、PendingIntent、异常隔离 |
+| `ui` | 提供首页、来源、规则和活动记录管理 | Compose 状态提升、StateFlow、导航和 ViewModel |
 
 ShakeGuard 是一个 Android-only 的本地原型，用于在“摇一摇”广告已经触发跨应用跳转后，尽快识别目标应用并执行返回动作。它面向普通用户，不依赖 root、LSPosed、VPN、云端服务或遥测。
 
