@@ -1,11 +1,11 @@
 # ShakeGuard
 ## 备份说明
 
-本目录是 `ShakeGuard` 最新完整实现的可发布前备份副本，备份目标为 `JiangZi0721/small-app`。截至 2026-08-30，备份基线对应本地分支 `feature/feedback-notifications` 的提交 `10bbe9205c0d8420debfebc38c1bc1e99d3a7577`（`docs: record recovery validation command`）。
+本目录是 `ShakeGuard` 最新完整实现的可发布前备份副本，备份目标为 `JiangZi0721/small-app` 的独立分支 `shakeguard-backup-20260830`。截至 2026-08-30，备份基线对应本地分支 `feature/feedback-notifications` 的提交 `10bbe9205c0d8420debfebc38c1bc1e99d3a7577`（`docs: record recovery validation command`）。
 
 选择这个基线而不是根目录 `main` 的原因是：根目录 `main` 仍停留在只有核心保护逻辑的早期版本，而该基线已经包含通知反馈、来源选择、规则管理、活动记录和可操作 Compose UI。项目文件共 93 个，构建缓存、IDE 文件、`local.properties`、设备密钥和 APK 均未纳入版本控制。
 
-如果以后从 GitHub 恢复开发，优先以该备份的 `main` 为起点，再建立新的功能分支；不要把 `app/build/`、`.gradle/` 或本机 `local.properties` 提交回仓库。
+远端 `main` 当前保留的是仓库中的其他 `vision-skill` 项目，因此本次不覆盖或合并 `main`。如果以后从 GitHub 恢复 ShakeGuard，直接检出 `shakeguard-backup-20260830`，再从该分支建立新的功能分支；不要把 `app/build/`、`.gradle/` 或本机 `local.properties` 提交回仓库。
 
 ## 项目结构
 
